@@ -8,6 +8,7 @@ object ConduitClient {
 
     val retrofit = Retrofit.Builder()
         .baseUrl("https://api.realworld.io/api/")
+        //.baseUrl("https://conduit.productionready.io/api/")
         .addConverterFactory(MoshiConverterFactory.create())
         .build()
 
