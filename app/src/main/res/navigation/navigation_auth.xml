@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/auth_navigation"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.mediamclone.ui.auth.LoginFragment"
+        android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.example.mediamclone.ui.auth.SignupFragment"
+        android:label="SignupFragment" />
+
+    <action
+        android:id="@+id/gotoLoginFragment"
+        app:destination="@id/loginFragment"
+        app:popUpTo="@id/auth_navigation"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim" />
+
+    <action
+        android:id="@+id/gotoSignUpFragment"
+        app:destination="@id/signupFragment"
+        app:popUpTo="@id/auth_navigation"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim" />
+
+</navigation>
