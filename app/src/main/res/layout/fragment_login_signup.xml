@@ -7,6 +7,15 @@
     android:orientation="vertical">
 
     <EditText
+        android:inputType="text"
+        android:ems="10"
+        android:hint="Username"
+        android:textAlignment="center"
+        android:id="@+id/userEt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
         android:inputType="textEmailAddress"
         android:ems="10"
         android:hint="Email"
@@ -25,8 +34,8 @@
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/loginBtn"
-        android:text="Login"
+        android:id="@+id/submitBtn"
+        android:text="Submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

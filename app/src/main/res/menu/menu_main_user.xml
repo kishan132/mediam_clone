@@ -8,5 +8,10 @@
             android:id="@+id/nav_feed"
             android:icon="@drawable/ic_menu_feed"
             android:title="@string/menu_feed" />
+
+        <item
+            android:id="@+id/nav_my_feed"
+            android:icon="@drawable/ic_menu_myfeed"
+            android:title="@string/menu_my_feed" />
     </group>
 </menu>

@@ -4,6 +4,8 @@ import com.example.api.ConduitClient
 
 object ArticlesRepo {
 
-    suspend fun getGlobalFeed() = ConduitClient.api.getArticles()
+    suspend fun getGlobalFeed() = ConduitClient.publicApi.getArticles().body()?.articles
+
+    suspend fun getMyFeed() = ConduitClient.authApi.getFeedArticles().body()?.articles
 
 }

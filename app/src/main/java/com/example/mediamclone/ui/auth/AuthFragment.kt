@@ -30,7 +30,7 @@ class AuthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController = binding?.let {Navigation.findNavController(it.root)}
+        navController = binding?.let {Navigation.findNavController(it.root.findViewById(R.id.authFragmentNavHost))}
 
         binding?.authTabLayout?.addOnTabSelectedListener(object : OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {

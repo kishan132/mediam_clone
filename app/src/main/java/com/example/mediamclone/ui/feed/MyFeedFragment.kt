@@ -5,13 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mediamclone.databinding.FragmentFeedBinding
 
-class GlobalFeedFragment : Fragment() {
+class MyFeedFragment : Fragment() {
 
     private var fragmentFeedBinding: FragmentFeedBinding? = null
     lateinit var feedViewModel : FeedViewModel
@@ -37,7 +36,7 @@ class GlobalFeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        feedViewModel.fetchGlobalFeed()
+        feedViewModel.fetchMyFeed()
         feedViewModel.feed.observe(viewLifecycleOwner, Observer {
             feedAdapter.submitList(it)
         })
@@ -47,5 +46,6 @@ class GlobalFeedFragment : Fragment() {
         super.onDestroyView()
         fragmentFeedBinding = null
     }
+
 
 }

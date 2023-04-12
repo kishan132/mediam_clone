@@ -15,7 +15,13 @@ class AuthViewModel : ViewModel() {
 
     fun login(email: String, password: String) = viewModelScope.launch {
         UserRepo.login(email, password)?.let {
-            _user.postValue(it.user)
+            _user.postValue(it)
+        }
+    }
+
+    fun signup(email: String, password: String, username: String) = viewModelScope.launch {
+        UserRepo.signup(email, password, username)?.let {
+            _user.postValue(it)
         }
     }
 

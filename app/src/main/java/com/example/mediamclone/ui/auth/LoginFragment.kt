@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.mediamclone.AuthViewModel
-import com.example.mediamclone.databinding.FragmentLoginBinding
+import com.example.mediamclone.databinding.FragmentLoginSignupBinding
 
 class LoginFragment : Fragment() {
 
-    private var binding : FragmentLoginBinding ?=null
+    private var binding : FragmentLoginSignupBinding?=null
 
     private val authViewModel : AuthViewModel by activityViewModels()
 
@@ -21,11 +22,13 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentLoginBinding.inflate(inflater,container,false)
+        binding = FragmentLoginSignupBinding.inflate(inflater,container,false)
         //authViewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
 
+        binding?.userEt?.isVisible = false
+
         binding?.apply {
-            loginBtn.setOnClickListener {
+            submitBtn.setOnClickListener {
                 authViewModel.login(
                     emailEt.text.toString(),
                     passwordEt.text.toString()
