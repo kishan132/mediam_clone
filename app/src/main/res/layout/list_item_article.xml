@@ -34,8 +34,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/source_sans_pro_light"
         android:text="09 April, 2023"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="8sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         app:layout_constraintStart_toEndOf="@+id/autherImage"
         app:layout_constraintTop_toBottomOf="@+id/autherName" />
 

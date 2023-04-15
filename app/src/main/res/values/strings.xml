@@ -5,9 +5,11 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_logout">Logout</string>
 
     <string name="menu_feed">Global Feed</string>
     <string name="menu_my_feed">My Feed</string>
     <string name="menu_auth">Authentication</string>
+    <string name="menu_settings">Settings</string>
+    <string name="arg_article_id">ARTICLE_ID</string>
 </resources>

@@ -1,7 +1,11 @@
 package com.example.mediamclone
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.provider.Settings.Global.putString
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -11,6 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.api.models.entities.User
@@ -18,13 +23,20 @@ import com.example.mediamclone.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        const val PREF_FILE_AUTH = "spref_token"
+        const val PREF_KEY_TOKEN = "token"
+    }
+
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-
     private lateinit var authViewModel: AuthViewModel
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        sharedPreferences = getSharedPreferences(PREF_FILE_AUTH, Context.MODE_PRIVATE)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -51,10 +63,24 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        sharedPreferences.getString(PREF_KEY_TOKEN,null)?.let { t->
+             authViewModel.getCurrentUser(t)
+        }
+
         authViewModel.user.observe(this, Observer {
             updateMenu(it)
+
+            it?.token?.let { tkn ->
+                sharedPreferences.edit {
+                    putString(PREF_KEY_TOKEN, tkn)
+                }
+            } ?: run{
+                sharedPreferences.edit {
+                    remove(PREF_KEY_TOKEN)
+                }
+            }
+
             navController.navigateUp()
-            //Toast.makeText(this,"authViewModel: $it", Toast.LENGTH_LONG).show()
         })
 
     }
@@ -67,10 +93,23 @@ class MainActivity : AppCompatActivity() {
                 binding.navView.inflateMenu(R.menu.menu_main_user)
             }
             else -> {
-
+                binding.navView.menu.clear()
+                binding.navView.inflateMenu(R.menu.menu_main_guest)
             }
         }
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.action_logout -> {
+                authViewModel.logout()
+                return true
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

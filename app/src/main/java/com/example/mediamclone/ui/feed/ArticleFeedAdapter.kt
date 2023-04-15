@@ -5,14 +5,17 @@ import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.api.models.entities.Article
 import com.example.mediamclone.R
 import com.example.mediamclone.databinding.ListItemArticleBinding
+import com.example.mediamclone.extensions.loadImage
+import com.example.mediamclone.extensions.timestamp
 
-class ArticleFeedAdapter : ListAdapter<Article, ArticleFeedAdapter.ArticleViewHolder>(
+class ArticleFeedAdapter(val onArticleClicked: (slug:String) -> Unit ) : ListAdapter<Article, ArticleFeedAdapter.ArticleViewHolder>(
 
     object : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
@@ -45,8 +48,11 @@ class ArticleFeedAdapter : ListAdapter<Article, ArticleFeedAdapter.ArticleViewHo
             autherName.text = article.author.username
             BodyTv.text = article.body
             headingTv.text = article.title
-            dateTv.text = "09 April, 2023"
-            autherImage.background = ColorDrawable(Color.GRAY)
+            dateTv.timestamp = article.createdAt
+            //dateTv.showFormattedDate(article.createdAt)
+            autherImage.loadImage(article.author.image,true)
+
+            root.setOnClickListener { onArticleClicked(article.slug) }
 
         }
 
